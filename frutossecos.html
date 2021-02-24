@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <title> Frutos Secos | Mejora tu Nutricion</title>
+    
+</head>
+<body>
+ <header>
+     <nav>
+         <ul>
+            <li><a href="index.html">Home</a></li>
+            
+             <li><a href="frutossecos.html">frutos Secos</a></li>
+
+             <li><a href="contacto.html">Contacto</a></li>
+         </ul>
+     </nav>
+ </header>
+ <main>
+        <aside>
+            <img src="img/logo.jpg"  alt="alimentacion">
+        </aside>
+        <article>
+            <section class="columns-desktop">
+                <div class="pie">
+                    <img src="img/banner.jpg" alt="banner">
+                    <div class="columns">
+                        <div class="title">Frutos Secos </div>
+                        <div class="price">$6</div>
+                    </div>
+                    <p class="desc">Nuestros famosos frutos secos</p>
+<button data-order="apple-pie">orden</button>
+</div>
+<div class="pie">
+    <img src="img/banner.jpg" alt="banner">
+    <div class="columns">
+        <div class="title">Frutos Secos </div>
+        <div class="price">$6</div>
+    </div>
+    <p class="desc">Nuestros famosos frutos secos</p>
+<button data-order="apple-pie">orden</button>
+</div>
+            </section>
+ </article>
+     
+ </main>
+</body>
+<footer>
+    <nav>
+        <ul>
+        <li><a href="pescados.html">Pescados</a></li>
+        <li><a href="bebidaslacteas.html">Bebidas Lacteas</a></li>
+</nav>
+</footer>
+ <script>
+     // cuando se cargue la pagina queremos agregar un codigo que se ejecute al hacer click en el boton de pedido
+     // queremos que la pagina guarde informacion sobre el pastel que selecciono y luego reenvie el navegador
+     // a la pagina de pedidos para su procesamiento
+     // 1 ahora quiero que mi script se ejecute cuando la pagina cargue por primera vez
+     //por lo que el primer elemento de javascript que se agregara es un detector de eventos para 
+     // contenido Dom cargado, entonces a medida que se cargue la pagina cualquier script
+     //que coloquemos dentro del controlador aqui se ejecutara en la pagina
+     window.addEventListener('DOMContentLoaded', function(e){
+         // aqui esta selecionado los atributos del button 
+         //para usar todo eso. usamos el selector de consultas (querySelector), 
+         //todo lo que puedo pasar en un selector dice que estoy buscando un boton que tenga atributos
+         // de orden, en estos momentos no nos iporta el valor, solo quiero un boton que tenga
+         //los atributos de orden y cada vez que lo encuentre, lo encontrara en la variable
+         //ordenButtons, 
+         //
+         const orderButtons=document.querySelector('button[data-order]');
+         // y ahora que esta en esa variable ordenButton podemos usar un forEach loop para cada uno de los 
+         //botones
+         //la funcion anonima recorrera cada buttony tendra acceso al boton individual
+        
+         //[].forEach.call(orderButtons, function(button){
+             [].forEach.call(orderButtons (function(button){
+             // entonces ahora podemos trabajar en el controlador de clicks y agregar la funcionalidad que 
+             //necesitamos
+             button.addEventListener('click',function(e){
+                 // ya que tenemos la funcion anonima tenemos acceso al objetivo de e.currentTarget
+                 //lo que quiere decir es que esto nos da referencia al elemento del html 
+                 // en el boton del que acabamos de hacer
+                 const button= e.currentTarget;
+                 // ya que tenemos referencia al contenedor e.currentTarget al observar su nodo primario
+                 // y ahora que tenemos referencia al contenedor podemos obtener 
+                 //toda la informacion que necesitamos sobre seleccion de usuarios 
+                 //La ParentNode interfaz contiene métodos que son específicos 
+                 //de los Nodeo bjetos que pueden tener hijos
+                 const container= button.parentNode;
+                 // ahora que ya podemos acceder a un objeto, necesitamos guardar toda la informacion 
+                 //del pedido, saber el titulo, los preciios bla bla. entonces para hacer eso 
+                 //crearemos un literal simple y crearemos propiedades para cada uno de esos
+
+const order={
+    //getAttribute() devuelve el valor del atributo especificado en el elemento. Si el
+    // atributo especificado no existe, el valor retornado puede ser tanto null como ""(una cadena vacía);
+    //La innerTextpropiedad de la HTMLElementinterfaz representa el contenido de texto "renderizado" de un nodo y sus descendientes. 
+    //Como captador, se aproxima al texto que obtendría el usuario si resaltara el 
+    //contenido del elemento con el cursor y luego lo copiara en el portapapeles.
+    id: button.getAttribute('data-order'),
+    title: container.querySelector('.title').innerText,
+    price: container.querySelector('.price').innerText,
+    desc: container.querySelector('.desc').innerText
+
+             };
+   // ahora que tenemos toda esta funcion necesitamos guardar en un almacenamiento local
+   // el order que se pone en azul es el objeto de la palabra clave de const
+   // hay un problema el localstorage no sabe como guardar cadenas, entonces lo que haremos sera 
+   //convertir el objeto en una cadena.ahora esto tendra mas sentido en el proximo clic
+   //donde se depurara este codigo y podra ver como sucede, pero ahora quiero ejecutar una funcion 
+   //que tome este order  objeto y esecialmente lo escriba como una cadena
+   //asi que agregamos JSON significa notacion de objetos javascript aqui 
+   //le estamos diciendo que haga el objeto en una cadena de texto con la siguiente funcion
+   // 
+   localStorage.setItem('order',JSON.stringify(order));
+   //ahora que tenemos eso guardado dentro del navegador, debilite nuestra pagina web a la pagina
+   //siguiente en el proceso, para hacer eso veremos la ubicacion actual de nuestro navegador
+   //si miramos la url de nuestro navegador se encuentra en el servidor entonces lo que 
+   //queremos hacer es cambiar los pasteles por orden dot HTML y eso es exactamente lo que 
+   //esta haciedno este entrenador o funcion 
+   //se esta mirando la ubicacion de la ventana window.location.href
+   //encontrando frutossecos.html y reemplazando ese valor con order dot html
+   //asi que ahora tenemos una nueva url a la que podemos reenviar el navegador  
+   const url= window.location.href.replace('frutossecos.html','order.html');
+   // y eso es exactamente lo que se hace en la ultima linea 
+   //establece la ubicacion window.location.href de los navegadores en el nuevo earl. que pricipalmente 
+   //reenvia la pagina a la nueva pagina dde pedidos
+   //bueno ahoar veremos como se ejecuta esto
+   window.location.href=url;
+
+             });    
+         });
+     });
+ </script>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba javascript</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+     crossorigin="anonymous">
+</head>
+<body>
+     <button id="click-me">Click me</button>
+    <section id='craig-shoemaker' class='card'> 
+        <h1> Naizabeth</h1>
+        <ul>
+            <li> <a href="https://github.com/" class='tag'> github </a></li>
+            <li> <a href="https://github.com/" class='tag'> casa</a> </li>
+
+        </ul>
+        <section id='john papa' class='card'> 
+            <h1> Nestor</h1>
+            <ul>
+                <li> <a href="https://github.com/" class='tag'> github </a></li>
+                <li> <a href="https://github.com/" class='tag'> casa </a></li>
+
+            </ul>
+</section>
+<script>
+    // 1
+    // lo que queremos realizar con esta funcion es que cada vez que se le haga click al enlace pueda
+    // redirigirse a otra ventana o sea un bucle
+    // hay un atributo al que podemos agregar un objetivo con nombre que nos permite designar el destino
+    // de la ubicacion del enlace 
+    // 1 paso lo que estamos haciendo aqui es usar el selector (queryselectorAll) de consultas del punto
+    // del documento > All para selecionar todos los elementos
+    // una vez que tenga acceso a esos enlaces puedo iterar a traves de ellos
+    // tecnicamente lo que regresa del selector no es na matriz es lo que se llama una lista de nodos 
+    // dentro de cada uno creo una funcion anonima (function(links)
+    // o sea cada vez que pase por este ciclo la variable de enlace estara en una referencia a un enlace 
+    // individual en la pagina, a partir de alli puedo llamar  a la funcion de atributos establecidos {o sea
+    // lo que esta dentro de las llaves } y decirle que quiero agregar un atributo llamado 
+    //target y configurar su valor para que parpadee y como todo esto se ejecuta dentro de un bucle 
+    //realiza esa accion para cada uno de los enlaces de la pagina 
+    // ahora la funcion setAttribute funciona para crear un atributo que aun no esta alli 
+    // o para actualizar el valor de los atributos
+
+//let links = document.querySelectorAll('.tag');
+//links.forEach(function(links){
+    //links.setAttribute('target', '_blank');
+
+//});
+
+//2 
+// lo que haremos sera ejecutar un codigo que actualizara las clases que se aplican a la 
+// tarjeta, bueno lo que quiero hacer es localizar un elemento que tenga la clase de tarjeta y agregarlo a la 
+//lista de clases que se aplican a este elemento por ejemplo supongamos que a la clase card le agrego 
+// una clase de card-dark en el documento del navehador se veria una tarjeta oscuro 
+//pero supongamos que queremos hacer este tipo de estilo con javascript 
+
+//3 hoy veremos el evento addevenlistner
+//window.addEventListener('DOMContentLoaded',function(e){
+ //console.log('the page is loaded');
+// funcion de evento 
+ //let btn=document.querySelector('#click-me');
+ //btn.addEventListener('click',function(e){
+   // console.log('the button was clicked');  
+
+ //});
+ //});
+
+// y por ultimo vamos a ver como hacer un cambio de orientacion del dispositivo con la funcion 
+//addEventListener
+// primero agregaremos un oyente de orientacion
+// o sea esta funcion sirve para cambiar el tipo de orientacion de movil, un poco compleja 
+window.addEventListener('orientationchange', function(e){
+    let screen= window.screen;
+    let angle= screen.orientation.angle;
+    let type= screen.orientation.type;
+    console.log(`angle:${angle}, type:${type}`);
+
+});
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <title>Mejora tu Nutricion</title>
+    <style>
+        @media only  screen and(min-width:768px){
+            article{ 
+                width:360px;
+
+            }
+        }
+        .input-group{
+            margin-bottom:20px;
+        }
+        .input-group input,
+        .input-group textarea,
+        .input-group select{
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius:2px;
+            width: 100%;
+ }
+ input [type='reset'] {
+     background:transparent;
+     border:0px;
+     border-radius:3px;
+     padding:10px;
+     cursor:pointer;
+ }
+ input [type='submit'] {
+     background:transparent;
+     border:solid 1px #999;
+     border-radius:3px;
+     padding:10px;
+ }
+
+
+
+
+
+    </style>
+   
+</head>
+<body>
+ <header>
+     <nav> 
+            <ul>
+            <li><a href="index.html">Home</a></li>
+           
+             <li><a href="frutossecos.html">frutos Secos</a></li>
+            
+             <li><a href="contacto.html">Contacto</a></li>
+         </ul>
+      
+     </nav>
+ </header>
+ <main>
+        <aside>
+            <img src="img/logo.jpg"  alt="alimentacion">
+        </aside>
+        <article>
+            <h1> order</h1>
+            <div class="pie">
+                <img src=""/>
+                <div class="columns">
+                    <div class="title"></div>
+                    <div class="price"></div>
+                </div>
+                <div> 
+                <p class="desc"></p>
+            </div>
+
+            <form action="http://localhost" method="POST">
+                <input type="hidden" id='pie-order' name='pie-order'>
+                <div class="input-group">
+                   <div>  <label for="first-name">First Name</label></div>
+                   <div> <input type="text" name='first-name' id='first-name'></div>
+                   
+ </div>
+ <div class="input-group">
+    <div>  <label for="adrees">adrees</label></div>
+    <div> <input type="text" name='adrees' id='adrees'></div>
+    
+
+                <div class="input-group">
+                <div>  <label for="state">state</label></div>
+   
+    
+            <div>
+             
+            <select name="state" id="state">
+                <option value="" selected>[selected one]</option>
+                <option value="alabama">alabama</option>
+                <option value="florida">florida</option>
+                <option value="california">california</option>
+                <option value="venezuela">venezuela</option>
+                <option value="new yorker">new yorker</option>
+            </select>
+            </div>
+        </div>
+
+            <div class="input-group">
+                <div>  <label for="postal-code">code postal</label></div>
+                <div> <input type="text" name='postal-code' id='postal-code'></div>
+                
+            </div>
+            <div class="input-group">
+                <div> <label for="comments"></label> comments</div>
+                <textarea name="" id="" cols="30" rows="10">
+              
+                </textarea>
+                 </div>
+                 <input type="reset" value='reset'/>
+                 <input type="submit" value='order'/>
+            </form>
+        </article>
+    
+ </main>
+</body>
+<script>
+// 1 cargar window con un script para que no haya errores 
+ window.addEventListener('DOMContentLoaded', function(e){
+     // hay que obtener la informacion del pedido del pastel 
+     //ahora el resulatdo del articulo estara dentro de la variable
+     const order=localStorage.getItem('order');
+     //tendremos que seleccionar lo que queremos sacar 
+     //para estar segura de que se esta ejecutando hago un if 
+     if(order){
+         const pieOrder=JSON.parse(order);
+         // para tener referencia en este contenedor querySelector('.pie');
+         const pie=document.querySelector('.pie');
+         const orderInput=document.querySelector('#pie-order');
+         orderInput.value=order;
+         // ahora que ya tengo listo mi if es momento de mostrar al usuario lo del pedido
+         const title=pie.querySelector('.title');
+         const price=pie.querySelector('.price');
+         const desc=pie.querySelector('.desc');
+         // falta el script para mostrar la imagen 
+         const img=pie.querySelector('img');
+         //con setAtributte se establecen para la fuente
+         img.setAttribute('src',`.img/${pieOrder.id}.png`);
+         img.setAttribute('alt',pieOrder.title);
+     });
+     
+
+ });
+
+
+
+
+</script>
+</html>
